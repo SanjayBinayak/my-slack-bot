@@ -1,0 +1,83 @@
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,sans-serif;
+    background:#050816;
+    overflow:hidden;
+}
+
+/* Blurry blue glow */
+body::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#2563eb;
+    border-radius:50%;
+    filter:blur(150px);
+    opacity:.5;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.container{
+    position:relative;
+    z-index:1;
+}
+
+.card{
+    width:500px;
+    padding:40px;
+    text-align:center;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:25px;
+
+    box-shadow:
+        0 8px 32px rgba(37,99,235,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.card h1{
+    margin-bottom:10px;
+    color:white;
+}
+
+.card p{
+    color:#cbd5e1;
+}
+
+.buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
+
+button{
+    padding:12px 24px;
+    border:none;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-3px);
+}
+
+.command-list{
+    margin-top:30px;
+    text-align:center;
+    color:#ffffff;
+}

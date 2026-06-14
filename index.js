@@ -1,3 +1,18 @@
+const express = require("express");
+const path = require("path");
+
+const web = express();
+
+web.use(express.static(path.join(__dirname, "public")));
+
+web.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+web.listen(3000, () => {
+  console.log("Dashboard running on http://localhost:3000");
+});
+
 require("dotenv").config();
 
 const { App } = require("@slack/bolt");
