@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/genai": "^2.8.0",
     "@slack/bolt": "^4.7.3",
     "axios": "^1.17.0",
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "serpapi": "^2.2.1"
   }
 }
