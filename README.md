@@ -8,7 +8,7 @@ Welcome to the **StarDance Slack Bot**. It ships with a public browser demo and 
 
 ## Screenshot
 
-![StarDance Slack Bot demo preview](public\Images\image.png)
+![StarDance Slack Bot demo preview](public/Images/image.png)
 
 ---
 
