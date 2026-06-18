@@ -1,83 +1,181 @@
-body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial,sans-serif;
-    background:#050816;
-    overflow:hidden;
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;             /* Added to properly use align-items */
+    justify-content: center;   /* Center the layout horizontally */
+    align-items: center;       
+    font-family: Arial, sans-serif;
+    background: #050816;
+    overflow-x: hidden;        /* Prevents the background blur circle from creating scrollbars */
+    padding: 20px;            /* Adds safety spacing on smaller screens */
+    box-sizing: border-box;
 }
 
-/* Blurry blue glow */
-body::before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:#2563eb;
-    border-radius:50%;
-    filter:blur(150px);
-    opacity:.5;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+body::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: #2563eb;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: .5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;               /* Ensures the blur stays behind the cards */
 }
 
-.container{
-    position:relative;
-    z-index:1;
+/* Base sizing rules for predictable scaling */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
-.card{
-    width:500px;
-    padding:40px;
-    text-align:center;
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;                 /* Increased spacing for a cleaner modern look */
+    justify-content: center;   /* Centers the columns inside the main view */
+    width: 100%;
+    max-width: 1200px;         /* Prevents cards from getting excessively wide on huge monitors */
+}
 
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1 1 450px;          /* Flex grow, shrink, and a comfortable base width */
+}
 
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:25px;
-
+.card {
+    width: 100%;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.04); /* Softened background for better glassmorphism */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
     box-shadow:
-        0 8px 32px rgba(37,99,235,0.25),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+        0 8px 32px rgba(37, 99, 235, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.card h1{
-    margin-bottom:10px;
-    color:white;
+.card h1 {
+    font-size: 45px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: white;
 }
 
-.card p{
-    color:#cbd5e1;
+.card h3 {
+    color: #2563eb;
+    margin-top: 0;
 }
 
-.buttons{
-    margin-top:20px;
-    display:flex;
-    justify-content:center;
-    gap:15px;
+.card h5 {
+    color: #7babff;
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 25px;
 }
 
-button{
-    padding:12px 24px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    cursor:pointer;
-    transition:.3s;
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-start; /* Aligned left to match typical dashboard cards */
+    gap: 15px;
 }
 
-button:hover{
-    transform:translateY(-3px);
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.command-list{
-    margin-top:30px;
-    text-align:center;
-    color:#ffffff;
+button:hover {
+    transform: translateY(-3px);
+    background: #1d4ed8;
+}
+
+.help {
+    width: 100%;
+    min-height: 90px;         /* Dynamically scales if text overflows */
+    padding: 20px;            /* Adds uniform inner breathing room */
+    display: flex;
+    flex-direction: column;   /* FIX: Forces the h3 text to sit below h2 */
+    justify-content: center;
+    align-items: center;      /* Centers both elements horizontally */
+    gap: 6px;                 /* Adds a neat spacing between the title and description */
+
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+}
+
+.help h2 {
+    margin: 0;
+    color: #ffa600;
+    font-size: 20px;
+    letter-spacing: 0.5px;    /* Optional styling for a cleaner look */
+}
+
+.help h3 {
+    margin: 0;
+    color: #cbd5e1;           /* Muted off-white/light gray text color */
+    font-size: 15px;
+    font-weight: normal;      /* Makes it look more like body text than a header */
+}
+
+.help-image {
+    max-width: 100%;       /* Ensures the image doesn't break out of the box */
+    height: auto;          /* Maintains the image's original aspect ratio */
+    margin-top: 15px;      /* Adds separation space between the text and the image */
+    border-radius: 12px;   /* Rounds the corners slightly to match the dashboard's design */
+    opacity: 0.9;          /* Optional: Blends it slightly better with the background theme */
+}
+
+.command-list {
+    flex: 1 1 500px;           /* Allows the commands panel to occupy the remaining side gracefully */
+    height: auto;              /* FIX: Dynamic height so it scales perfectly with your text */
+    max-height: 85vh;          /* Keeps it within the view height */
+    overflow-y: auto;          /* Gives a smooth scrollbar if your command list gets too long */
+
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    color: #ffffff;
+    padding: 40px;
+}
+
+.command-list h2 {
+    color: #2563eb;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+/* Custom styling for commands within your list to make them pop */
+.command-list h4 {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 4px;
+    font-family: monospace;     /* Gives it that bot/developer aesthetic */
+}
+
+.command-list p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 20px;
 }
