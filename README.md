@@ -5,8 +5,8 @@ This is my **Slack Bot** project. I used **Node.js** to perform backend, **web A
 # My Demo site 
 ![Image of demo site](public/Images/image.png)
 
-#My Slack Bot Channel
-<video src="public/Inages/slack.mp4" width="100%" controls></video>
+# My Slack Bot Channel
+![Image of slack channel](public/Images/Slack.png)
 
 #Try My Demo
 You should have joined **Hack Club Workspace**
