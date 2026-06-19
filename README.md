@@ -1,190 +1,48 @@
-# 🚀 My StarDance Slack Bot + Public Demo Site
+# StarDance Slack Bot
+**Hey Coder**
+This is my **Slack Bot** project. I used **Node.js** to perform backend, **web APIs** to get my response and **Nest** to run my bot 24/7. I also made a Demo website for my bot.
 
-Welcome to the **My StarDance Slack Bot**. I also made a demo site where you can try my bot. The demo website gives user a quick overview about this bot. I used **Node.js** to create backend of this project and **'Html' and 'CSS'** to design my demo website.
+# My Demo site 
+![Image of demo site](public/Images/image.png)
 
-**Use My Bot** [Join Bot on Slack](https://hackclub.enterprise.slack.com/archives/D0B8Q5FUW7Q) and test the bot commands inside the Bot! You can use any of the registered slash commands listed in this document, or use command /ssb-help to get list of slash commands.
+#My Slack Bot Channel
+<video src="public/Inages/slack.mp4" width="100%" controls></video>
 
----
+#Try My Demo
+You should have joined **Hack Club Workspace**
+Join My [Slack channel](https://hackclub.enterprise.slack.com/archives/C0BBWNK0WGZ)
 
-## Screenshot Of Demo Site
+# Features
+* You can use any command listed in **Demo Site** or use **/ssb-help** in Slack channel.
+* Send slash Command and get response.
+* Entartain yourself, Challange yourself or use it for your search.
 
-![StarDance Slack Bot demo preview](public/Images/image.png)
+## Run Locally
 
----
+1. Clone the repository:
 
-## ⚡ Architecture Flow
-
-Here is a visual breakdown of how the bot receives slash commands from Slack, processes them inside the Bolt SDK framework, and queries public APIs to respond to users:
-
-```mermaid
-graph TD
-    User([Slack User]) -->|Types slash command| SlackServer[Slack Gateway]
-    SlackServer -->|WebSocket Socket Mode Connection| BoltBot[Node.js Slack Bot Client]
-    BoltBot -->|Verifies command & ack| SlackServer
-    BoltBot -->|Invokes command handler| Handler{Command Router}
-
-    %% Command Routes to External APIs
-    Handler -->|/ssb-catfact| CatAPI[CatFact API: catfact.ninja]
-    Handler -->|/ssb-joke| JokeAPI[Official Joke API: appspot.com]
-    Handler -->|/ssb-gif| NekoAPI[Nekos Best API: nekos.best]
-    Handler -->|/ssb-trivia| TriviaAPI[Open Trivia DB: opentdb.com]
-    Handler -->|/ssb-weather| WeatherAPI[Weather API: wttr.in]
-    Handler -->|/ssb-ipinfo| IpAPI[IP Geolocation API: ip-api.com]
-    Handler -->|/ssb-website| DNSAPI[Cloudflare DNS API: cloudflare-dns.com]
-    Handler -->|/ssb-web| SerpAPI[SerpApi: Google Search API]
-    Handler -->|/ssb-ping| LocalCalc[Local Latency Calculation]
-
-    %% API Returns
-    CatAPI -->|Returns fact| BoltBot
-    JokeAPI -->|Returns joke| BoltBot
-    NekoAPI -->|Returns gif URL| BoltBot
-    TriviaAPI -->|Returns trivia question| BoltBot
-    WeatherAPI -->|Returns weather string| BoltBot
-    IpAPI -->|Returns geo JSON| BoltBot
-    DNSAPI -->|Returns DNS records JSON| BoltBot
-    SerpAPI -->|Returns search results JSON| BoltBot
-    LocalCalc -->|Returns latency ms| BoltBot
-
-    %% Final Response Flow
-    BoltBot -->|Sends responsive message| SlackServer
-    SlackServer -->|Displays rich response| User
-```
-
----
-
-## 🛠️ Slash Commands Catalog
-
-The bot implements an extensive array of utility, info-seeking, and entertainment slash commands:
-
-### 🌟 Information & Utility Commands
-| Slash Command | Description | Public REST API |
-| :--- | :--- | :--- |
-| `/ssb-help` | Display the list of available bot commands and usage guidelines | *N/A (Internal)* |
-| `/ssb-ping` | Check the bot's live latency and connection status | *N/A (Internal)* |
-| `/ssb-catfact` | Fetch a random, interesting fact about cats | `https://catfact.ninja/fact` |
-| `/ssb-joke` | Get a random setup and punchline joke | `https://official-joke-api.appspot.com` |
-| `/ssb-gif` | Get a random, cute anime neko GIF url | `https://nekos.best/api/v2/neko` |
-| `/ssb-trivia` | Fetch a medium-difficulty multiple-choice trivia question | `https://opentdb.com` |
-| `/ssb-weather` | Check live, formatting-free weather updates for a specified city | `https://wttr.in/<city>?format=3` |
-| `/ssb-ipinfo` | Fetch physical geolocation data, ISP, and coordinates for an IP address | `http://ip-api.com/json/<ip>` |
-| `/ssb-website` | Check active target DNS paths and resolution status for a domain |`https://cloudflare-dns.com` |
-| `/ssb-web` | Run a live Google Search query to get top organic results using SerpApi | `https://serpapi.com` |
----
-
-## 🚀 Setup & Local Installation
-
-### Prerequisites
-*   Node.js (v18.x or newer) and npm installed.
-*   A Slack API Workspace where you have permission to install apps.
-*   A code editor.
-
-### 1. Register App on Slack
-1. Go to the [Slack Apps Dashboard](https://api.slack.com/apps) and select **Create New App → From Scratch**.
-2. Go to **Socket Mode** in the left sidebar and toggle **Enable Socket Mode**.
-3. Under **Basic Information**, scroll to **App-Level Tokens** and click **Generate Token**. Add the `connections:write` scope and copy the generated token (starts with `xapp-`).
-4. Go to **OAuth & Permissions** and under **Bot Token Scopes** add:
-   * `chat:write`
-   * `commands`
-   * `app_mentions:read`
-   * `channels:history`
-5. Click **Install to Workspace** at the top of the page, then copy the **Bot User OAuth Token** (starts with `xoxb-`).
-6. Go to **Slash Commands** and register each command listed in the catalog above.
-
-### 2. Scaffold Code Locally
-Clone your repository and install dependencies:
-```bash
-git clone [https://github.com/SanjayBinayak/my-slack-bot.git](https://github.com/SanjayBinayak/my-slack-bot.git)
+git clone https://github.com/SanjayBinayak/my-slack-bot.git
 cd my-slack-bot
+
+2. Install dependencies:
+
 npm install
-```
 
-Open the public demo in a browser after starting the app at `http://localhost:3000`.
 
-Copy the provided template into a local **`.env`** file in your root folder:
-Then fill in your real Slack tokens:
-```env
-SLACK_BOT_TOKEN=xoxb-your-bot-user-token
-SLACK_APP_TOKEN=xapp-your-app-level-token
-SERPAPI_API_KEY=your-serpapi-api-key
-```
+3. Create a `.env` file and add your Slack and API credentials:
 
-[!WARNING]
-Keep your .env tokens secure! Never push them to public repositories. Double-check that .env is listed inside your .gitignore file.
-If these tokens were exposed anywhere public, rotate them in Slack before shipping.
+SLACK_BOT_TOKEN=your_bot_token
+SLACK_APP_TOKEN=your_app_token
+OPENAI_API_KEY=your_api_key
 
-Start the bot locally:
-```bash
+
+4. Start the application:
+
 node index.js
-```
 
----
+5. Use it:
 
-## 🔒 24/7 Deployment on Hack Club Nest
+you can now use your commands in your slack.
+you can also visit your demo site.
 
-To host your Slackbot 24/7 for free on the Hack Club Nest Debian server, follow these production setup steps:
-
-### 1. SSH & Prerequisite Setup
-Log into your Nest container(you have to request to use Nest first):
-```bash
-ssh root@your-nest-domain-or-ip
-```
-*(If Node/Git is not yet installed inside your container, run)*:
-```bash
-apt update && apt install -y curl git
-curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
-apt install -y nodejs
-```
-
-### 2. Pull Code and Recreate Secrets
-Clone your repository and build dependencies:
-```bash
-git clone https://github.com/divyagunda54-del/stardance_demo.git
-cd stardance_demo
-npm install
-```
-Configure your credentials on the server:
-paste above **.env** file
-```bash
-nano .env
-```
-*(Paste your tokens, press `Ctrl+O` → `Enter` → `Ctrl+X` to save and exit)*.
-
-### 3. Register Systemd Service
-The repository already includes a pre-configured **`slackbot.service`** file. Copy it to your systemd system folder:
-```bash
-cp slackbot.service /etc/systemd/system/slackbot.service
-```
-
-### 4. Enable and Control Bot Service
-Reload the system daemon and enable your bot to run on server boot automatically:
-```bash
-systemctl daemon-reload
-systemctl enable --now slackbot.service
-```
-
-## 5. Register Domain in nest
-Go to **Domains** webpage in your Nest Dashboard and add your domain.
-Or go to [hackclub-domain](https://github.com/SanjayBinayak/hackclub-domain/blob/main/hackclub.app.yaml) then edit it and add your **CNAME** in **hackclub.app.yml** file and request a pull request. Now you can youse **username.hackclub.app** as your domain for demo site.
-
-Use these standard commands to control your bot's lifecycle:
-*   **Check status**: `systemctl status slackbot.service`
-*   **Restart bot**: `systemctl restart slackbot.service`
-*   **Stop bot**: `systemctl stop slackbot.service`
-*   **View live log output**: `journalctl -u slackbot.service -f`
-
----
-
-## 🛠️ Troubleshooting Guide
-
-| Issue | Potential Reason | Exact Resolution |
-| :--- | :--- | :--- |
-| **`SocketModeServerError`** or Auth Crashes | Mismatched or incorrectly copied tokens | Confirm `xoxb-` is in `SLACK_BOT_TOKEN` and `xapp-` is in `SLACK_APP_TOKEN` in your `.env`. |
-| Slash Command displays **"Dispatch Error"** | The bot script is not running or socket is offline | Verify your local command is running, or run `systemctl status slackbot` on Nest to verify active uptime. |
-| Commands fail with **"Timeout Error"** | Code did not invoke `ack()` within 3 seconds | Slack requires Bolt to call `await ack()` immediately at the start of command execution. |
-| Slash Command **doesn't appear in Slack** | The command was not registered in Slack dashboard | Go to *Slack Apps console → Slash Commands* and verify command name matches exactly. |
-
----
-
-## 🤖 AI Declaration
-
-I declare that I used AI assistance (specifically Google's Gemini-powered assistant Antigravity) to help generate, format, and refine the documentation in this README.md file.
+**I declare that I used AI and StarDance Guide to make some content of this project**
