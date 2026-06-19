@@ -94,7 +94,7 @@ app.command("/ssb-trivia", async ({ ack, respond }) => {
     const question = response.data.results[0];
 
     await respond({
-      text: `🧠 Your trivia Question\n\n${decodeURIComponent(question.question)}\n\nA) ${decodeURIComponent(question.correct_answer)}\nB) ${decodeURIComponent(question.incorrect_answers[0])}\nC) ${decodeURIComponent(question.incorrect_answers[1])}\nD) ${decodeURIComponent(question.incorrect_answers[2])}`
+      text: `🧠 Here is your Question\n\n${decodeURIComponent(question.question)}\n\nA) ${decodeURIComponent(question.correct_answer)}\nB) ${decodeURIComponent(question.incorrect_answers[0])}\nC) ${decodeURIComponent(question.incorrect_answers[1])}\nD) ${decodeURIComponent(question.incorrect_answers[2])}`
     });
   } catch (err) {
     console.error(err);
@@ -145,12 +145,12 @@ app.command("/ssb-ipinfo", async ({ command, ack, respond }) => {
     const data = response.data;
 
     if (data.status === "fail") {
-      await respond({ text: `❌ Failed to lookup IP: ${data.message || "Invalid IP address or private range."}` });
+      await respond({ text: ` Failed to lookup IP: ${data.message || "Invalid IP address or private range."}` });
       return;
     }
 
     await respond({
-      text: `🌐 *IP Lookup Info for ${data.query}*:\n` +
+      text: ` *IP Lookup Info for ${data.query}*:\n` +
             `• *Country:* ${data.country} (${data.countryCode})\n` +
             `• *Region/State:* ${data.regionName}\n` +
             `• *City:* ${data.city}\n` +
@@ -191,14 +191,14 @@ app.command("/ssb-website", async ({ command, ack, respond }) => {
     const data = response.data;
 
     if (data.Status !== 0 || !data.Answer) {
-      await respond({ text: `❌ Could not find valid DNS records for \`${domain}\`. Make sure it's a valid registered domain.` });
+      await respond({ text: ` Could not find valid DNS records for \`${domain}\`. Make sure it's a valid registered domain.` });
       return;
     }
     
     const ipAddresses = data.Answer.filter(record => record.type === 1).map(record => record.data).join(", ");
 
     await respond({
-      text: `🖥️ *Website Info for ${domain}*:\n` +
+      text: ` *Website Info for ${domain}*:\n` +
             `• *Status:* Active / Resolving\n` +
             `• *Primary IP Target(s):* ${ipAddresses || "Hidden behind CDN/Cloudflare"}\n` +
             `• *Query Security Details:* DNSSEC ${data.AD ? "Verified" : "Unverified"}\n\n` +
@@ -250,7 +250,7 @@ app.command("/ssb-web", async ({ command, ack, respond }) => {
 
   } catch (err) {
     console.error(err);
-    await respond({ text: "❌ Failed to complete web search. Double check your SERPAPI_API_KEY value." });
+    await respond({ text: " Failed to complete web search. Double check your SERPAPI_API_KEY value." });
   }
 });
 

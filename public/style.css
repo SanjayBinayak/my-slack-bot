@@ -1,13 +1,13 @@
 body {
     margin: 0;
     min-height: 100vh;
-    display: flex;             /* Added to properly use align-items */
-    justify-content: center;   /* Center the layout horizontally */
+    display: flex;             
+    justify-content: center;   
     align-items: center;       
     font-family: Arial, sans-serif;
     background: #050816;
-    overflow-x: hidden;        /* Prevents the background blur circle from creating scrollbars */
-    padding: 20px;            /* Adds safety spacing on smaller screens */
+    overflow-x: hidden;        
+    padding: 20px;            
     box-sizing: border-box;
 }
 
@@ -23,10 +23,10 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -1;               /* Ensures the blur stays behind the cards */
+    z-index: -1;               
 }
 
-/* Base sizing rules for predictable scaling */
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -34,23 +34,23 @@ body::before {
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;                 /* Increased spacing for a cleaner modern look */
-    justify-content: center;   /* Centers the columns inside the main view */
+    gap: 30px;                
+    justify-content: center;   
     width: 100%;
-    max-width: 1200px;         /* Prevents cards from getting excessively wide on huge monitors */
+    max-width: 1200px;         
 }
 
 .left-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    flex: 1 1 450px;          /* Flex grow, shrink, and a comfortable base width */
+    flex: 1 1 450px;        
 }
 
 .card {
     width: 100%;
     padding: 50px;
-    background: rgba(255, 255, 255, 0.04); /* Softened background for better glassmorphism */
+    background: rgba(255, 255, 255, 0.04); 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -82,7 +82,7 @@ body::before {
 .buttons {
     margin-top: 20px;
     display: flex;
-    justify-content: flex-start; /* Aligned left to match typical dashboard cards */
+    justify-content: flex-start; 
     gap: 15px;
 }
 
@@ -104,13 +104,13 @@ button:hover {
 
 .help {
     width: 100%;
-    min-height: 90px;         /* Dynamically scales if text overflows */
-    padding: 20px;            /* Adds uniform inner breathing room */
+    min-height: 90px;         
+    padding: 20px;          
     display: flex;
-    flex-direction: column;   /* FIX: Forces the h3 text to sit below h2 */
+    flex-direction: column;  
     justify-content: center;
-    align-items: center;      /* Centers both elements horizontally */
-    gap: 6px;                 /* Adds a neat spacing between the title and description */
+    align-items: center;     
+    gap: 6px;              
 
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(20px);
@@ -124,29 +124,29 @@ button:hover {
     margin: 0;
     color: #ffa600;
     font-size: 20px;
-    letter-spacing: 0.5px;    /* Optional styling for a cleaner look */
+    letter-spacing: 0.5px;   
 }
 
 .help h3 {
     margin: 0;
-    color: #cbd5e1;           /* Muted off-white/light gray text color */
+    color: #cbd5e1;           
     font-size: 15px;
-    font-weight: normal;      /* Makes it look more like body text than a header */
+    font-weight: normal;      
 }
 
 .help-image {
-    max-width: 100%;       /* Ensures the image doesn't break out of the box */
-    height: auto;          /* Maintains the image's original aspect ratio */
-    margin-top: 15px;      /* Adds separation space between the text and the image */
-    border-radius: 12px;   /* Rounds the corners slightly to match the dashboard's design */
-    opacity: 0.9;          /* Optional: Blends it slightly better with the background theme */
+    max-width: 100%;      
+    height: auto;         
+    margin-top: 15px;      
+    border-radius: 12px;   
+    opacity: 0.9;          
 }
 
 .command-list {
-    flex: 1 1 500px;           /* Allows the commands panel to occupy the remaining side gracefully */
-    height: auto;              /* FIX: Dynamic height so it scales perfectly with your text */
-    max-height: 85vh;          /* Keeps it within the view height */
-    overflow-y: auto;          /* Gives a smooth scrollbar if your command list gets too long */
+    flex: 1 1 500px;          
+    height: auto;              
+    max-height: 85vh;         
+    overflow-y: auto;          
 
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(20px);
@@ -165,12 +165,12 @@ button:hover {
     margin-bottom: 30px;
 }
 
-/* Custom styling for commands within your list to make them pop */
+
 .command-list h4 {
     color: #ffffff;
     font-size: 18px;
     margin-bottom: 4px;
-    font-family: monospace;     /* Gives it that bot/developer aesthetic */
+    font-family: monospace;    
 }
 
 .command-list p {

@@ -45,4 +45,8 @@ node index.js
 you can now use your commands in your slack.
 you can also visit your demo site.
 
+<<<<<<< HEAD
 **I declare that I used AI and StarDance Guide to make some content of this project**
+=======
+**I declare that I used AI and StarDance Guide to make some content of this project**
+>>>>>>> origin/main
