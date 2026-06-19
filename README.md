@@ -1,12 +1,12 @@
-# 🚀 StarDance Slack Bot + Public Demo Site
+# 🚀 My StarDance Slack Bot + Public Demo Site
 
-Welcome to the **StarDance Slack Bot**. It ships with a public browser demo and a Slack assistant backend, both powered by **Node.js**. The web demo gives visitors an immediate way to explore the project in a browser, while the Slack bot handles the slash-command experience through **`@slack/bolt`**.
+Welcome to the **My StarDance Slack Bot**. I also made a demo site where you can try my bot. The demo website gives user a quick overview about this bot. I used **Node.js** to create backend of this project and **'Html' and 'CSS'** to design my demo website.
 
-**Slack Bot Channel Demo:** [Join Bot on Slack](https://hackclub.enterprise.slack.com/archives/D0B8Q5FUW7Q) and test the bot commands inside the Bot! You can interact directly with the bot using any of the registered slash commands listed in this document, or use command /ssb-help to get list of slash commands
+**Use My Bot** [Join Bot on Slack](https://hackclub.enterprise.slack.com/archives/D0B8Q5FUW7Q) and test the bot commands inside the Bot! You can use any of the registered slash commands listed in this document, or use command /ssb-help to get list of slash commands.
 
 ---
 
-## Screenshot
+## Screenshot Of Demo Site
 
 ![StarDance Slack Bot demo preview](public/Images/image.png)
 
@@ -57,25 +57,26 @@ graph TD
 The bot implements an extensive array of utility, info-seeking, and entertainment slash commands:
 
 ### 🌟 Information & Utility Commands
-| Slash Command | Description | Example Usage | Public REST API |
-| :--- | :--- | :--- | :--- |
-| `/ssb-help` | Display the list of available bot commands and usage guidelines | `/ssb-help` | *N/A (Internal)* |
-| `/ssb-ping` | Check the bot's live latency and connection status | `/ssb-ping` | *N/A (Internal)* |
-| `/ssb-catfact` | Fetch a random, interesting fact about cats | `/ssb-catfact` | `https://catfact.ninja/fact` |
-| `/ssb-joke` | Get a random setup and punchline joke | `/ssb-joke` | `https://official-joke-api.appspot.com` |
-| `/ssb-gif` | Get a random, cute anime neko GIF url | `/ssb-gif` | `https://nekos.best/api/v2/neko` |
-| `/ssb-trivia` | Fetch a medium-difficulty multiple-choice trivia question | `/ssb-trivia` | `https://opentdb.com` |
-| `/ssb-weather` | Check live, formatting-free weather updates for a specified city | `/ssb-weather Boston` | `https://wttr.in/<city>?format=3` |
-| `/ssb-ipinfo` | Fetch physical geolocation data, ISP, and coordinates for an IP address | `/ssb-ipinfo 8.8.8.8` | `http://ip-api.com/json/<ip>` |
-| `/ssb-website` | Check active target DNS paths and resolution status for a domain | `/ssb-website google.com` | `https://cloudflare-dns.com` |
-| `/ssb-web` | Run a live Google Search query to get top organic results using SerpApi | `/ssb-web Nodejs tutorial` | `https://serpapi.com` |
+| Slash Command | Description | Public REST API |
+| :--- | :--- | :--- |
+| `/ssb-help` | Display the list of available bot commands and usage guidelines | *N/A (Internal)* |
+| `/ssb-ping` | Check the bot's live latency and connection status | *N/A (Internal)* |
+| `/ssb-catfact` | Fetch a random, interesting fact about cats | `https://catfact.ninja/fact` |
+| `/ssb-joke` | Get a random setup and punchline joke | `https://official-joke-api.appspot.com` |
+| `/ssb-gif` | Get a random, cute anime neko GIF url | `https://nekos.best/api/v2/neko` |
+| `/ssb-trivia` | Fetch a medium-difficulty multiple-choice trivia question | `https://opentdb.com` |
+| `/ssb-weather` | Check live, formatting-free weather updates for a specified city | `https://wttr.in/<city>?format=3` |
+| `/ssb-ipinfo` | Fetch physical geolocation data, ISP, and coordinates for an IP address | `http://ip-api.com/json/<ip>` |
+| `/ssb-website` | Check active target DNS paths and resolution status for a domain |`https://cloudflare-dns.com` |
+| `/ssb-web` | Run a live Google Search query to get top organic results using SerpApi | `https://serpapi.com` |
 ---
 
 ## 🚀 Setup & Local Installation
 
 ### Prerequisites
 *   Node.js (v18.x or newer) and npm installed.
-*   A Slack Workspace where you have permission to install apps.
+*   A Slack API Workspace where you have permission to install apps.
+*   A code editor.
 
 ### 1. Register App on Slack
 1. Go to the [Slack Apps Dashboard](https://api.slack.com/apps) and select **Create New App → From Scratch**.
@@ -100,10 +101,6 @@ npm install
 Open the public demo in a browser after starting the app at `http://localhost:3000`.
 
 Copy the provided template into a local **`.env`** file in your root folder:
-```bash
-cp .env.example .env
-```
-
 Then fill in your real Slack tokens:
 ```env
 SLACK_BOT_TOKEN=xoxb-your-bot-user-token
@@ -117,7 +114,7 @@ If these tokens were exposed anywhere public, rotate them in Slack before shippi
 
 Start the bot locally:
 ```bash
-npm start
+node index.js
 ```
 
 ---
@@ -127,7 +124,7 @@ npm start
 To host your Slackbot 24/7 for free on the Hack Club Nest Debian server, follow these production setup steps:
 
 ### 1. SSH & Prerequisite Setup
-Log into your Nest container:
+Log into your Nest container(you have to request to use Nest first):
 ```bash
 ssh root@your-nest-domain-or-ip
 ```
@@ -146,6 +143,7 @@ cd stardance_demo
 npm install
 ```
 Configure your credentials on the server:
+paste above **.env** file
 ```bash
 nano .env
 ```
@@ -163,6 +161,10 @@ Reload the system daemon and enable your bot to run on server boot automatically
 systemctl daemon-reload
 systemctl enable --now slackbot.service
 ```
+
+## 5. Register Domain in nest
+Go to **Domains** webpage in your Nest Dashboard and add your domain.
+Or go to [hackclub-domain](https://github.com/SanjayBinayak/hackclub-domain/blob/main/hackclub.app.yaml) then edit it and add your **CNAME** in **hackclub.app.yml** file and request a pull request. Now you can youse **username.hackclub.app** as your domain for demo site.
 
 Use these standard commands to control your bot's lifecycle:
 *   **Check status**: `systemctl status slackbot.service`
