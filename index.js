@@ -119,6 +119,57 @@ app.command("/ssb-weather", async ({ command, ack, respond }) => {
   }
 }); 
 
+// Command: /ssb-userinfo
+app.command("/ssb-userinfo", async ({ command, ack, respond }) => {
+  await ack();
+
+  try {
+    const mention = command.text.trim();
+
+    const match = mention.match(/<@([^|>]+)/);
+
+    if (!match) {
+      await respond({ text: "Please mention a user. /ssb-usereinfo @user" });
+      return;
+    }
+
+    const userId = match[1];
+
+    const response = await axios.get(
+      "https://slack.com/api/users.info",
+      {
+        params: {
+          user: userId
+        },
+        headers: {
+          Authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`
+        }
+      }
+    );
+
+    const data = response.data;
+
+    if (!data.ok) {
+      await respond({
+        text: `API not working properly: ${data.error}`
+      });
+      return;
+    }
+
+    await respond({
+      text:
+        `*${data.user.real_name}*\n` +
+        ` Username: ${data.user.name}\n` +
+        ` ID: ${data.user.id}\n` +
+        ` Timezone: ${data.user.tz || "N/A"}`
+    });
+
+  } catch (err) {
+    console.error(err);
+    await respond({ text: "Failed to fetch user info." });
+  }
+});
+
 // Command: /ssb-ipinfo
 app.command("/ssb-ipinfo", async ({ command, ack, respond }) => {
   await ack();
