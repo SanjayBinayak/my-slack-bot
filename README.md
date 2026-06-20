@@ -1,11 +1,11 @@
-# StarDance Slack Bot
+# Hyper Bot
 **Hey Coder**
-This is my **Slack Bot** project. I used **Node.js** to perform backend, **web APIs** to get my response and **Nest** to run my bot 24/7. I also made a Demo website for my bot.
+This is my **Hyper Bot** project in slack. I used **Node.js** to perform backend, **web APIs** to get my response and **Nest** to run my bot 24/7. I also made a Demo website for my bot.
 
 # My Demo site 
 ![Image of demo site](public/Images/image.png)
 
-# My Slack Bot Channel
+# My Bot Channel
 ![Image of slack channel](public/Images/Slack.png)
 
 #Try My Demo
